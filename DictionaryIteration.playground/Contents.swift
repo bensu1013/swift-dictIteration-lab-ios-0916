@@ -16,19 +16,17 @@
  * The Kinks: _Low Budget_
  * The Beatles: _Sgt. Pepper's Lonely Hearts Club Band_
  */
-// write your code here
-
-
-
-
-
-
+var bandAlbums: [String : String] = [:]
+bandAlbums["Nirvana"] = "Nevermind"
+bandAlbums["Blondie"] = "Parallel Lines"
+bandAlbums["The Kinks"] = "Low Budget"
+bandAlbums["The Beatles"] = "Sgt. Pepper's Lonely Hearts Club Band"
 
 
 /*: question2
  ### 2. Oops, we forgot an album! Add the Pixie's _Doolittle_ to the dictionary you created in Question 1.
  */
-// write your code here
+bandAlbums["Pixie's"] = "Doolittle"
 
 
 
@@ -40,7 +38,7 @@
 /*: question3
  ### 3. We don't care that much about The Kinks. Delete them from the dictionary you created in Question 1.
  */
-// write your code here
+bandAlbums["The Kinks"] = nil
 
 
 
@@ -54,7 +52,12 @@
  ### 4. A band name has been defined in the constant `bandName` below. Using this constant and the dictionary you created in Question 1, print "<Band>'s top-selling album was <Album>" to the console.
  */
 let bandName = "Nirvana"
-// write your code here
+var album = bandAlbums[bandName]
+if let album = album {
+    print("\(bandName)'s top-selling album was \(album)")
+} else {
+    print("There is no \(bandName) on record. Sorry mate.")
+}
 
 
 
@@ -66,7 +69,11 @@ let bandName = "Nirvana"
 /*: question5
  ### 5. Iterate over the dictionary you created in Question 1 and print "<Band>'s top-selling album was <Album>" for each item in the dictionary.
  */
-// write your code here
+for (key, value) in bandAlbums {
+    print("\(key)'s top-selling album was \(value)")
+    
+    
+}
 
 
 
@@ -78,7 +85,7 @@ let bandName = "Nirvana"
 /*: question6
  ### 6. What type of data structure is returned when you iterate over a dictionary?
  */
-
+//constant strings
 
 
 
@@ -89,7 +96,8 @@ let bandName = "Nirvana"
 /*: question7
  ### 7. Imagine every student in every grade in a high school took an exam. Each student got a letter grade based on their test results (A, B, C, D, and F). The results were averaged together per grade. How could you represent this mapping of grades to exam average?
  */
-
+//  [String : String]
+//  [Grade : AveScore]
 
 
 
@@ -105,11 +113,7 @@ let bandName = "Nirvana"
  * Grade 11: C
  * Grade 12: B
  */
-// write your code here
-
-
-
-
+let gradeScores: [Int : String] = [ 9 : "B", 10 : "A", 11 : "C", 12 : "B"]
 
 
 
@@ -117,7 +121,9 @@ let bandName = "Nirvana"
 /*: question9
  ### 9. Print the message "Grade <Grade> got <Score>" for each grade in the dictionary you created in Question 8.
  */
-// write your code here
+for (key, value) in gradeScores {
+    print("Grade \(key) got \(value)")
+}
 
 
 
@@ -129,11 +135,31 @@ let bandName = "Nirvana"
 /*: question10
  ### 10. Find which grade got the highest score! Iterate through the dictionary to find the highest score, then print the message "Grade <Grade> got the highest score with <Score>!" to the console.
  */
-// write your code here
+var bestScore: String = ""
+var bestGrade: Int = 0
 
+for (key, value) in gradeScores {
+    switch value {
+    case "A":
+        bestScore = value
+        bestGrade = key
+    case "B":
+        if !(bestScore == "A"){
+            bestScore = value
+            bestGrade = key
+        }
+    case "C":
+        if (bestScore == "D") || (bestScore == "F") {
+            bestScore = value
+            bestGrade = key
+        }
+    default:
+        bestScore = value
+        bestGrade = key
+    }
+}
 
-
-
+print("Grade \(bestGrade) got the highest score with \(bestScore)!")
 
 
 
